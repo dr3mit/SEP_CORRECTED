@@ -1,0 +1,35 @@
+{
+  "name": "sep",
+  "version": "1.0.0",
+  "description": "senior enrichment project ",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "pg": "^7.11.0",
+    "react": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "sequelize": "^5.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dr3mit/SEP.git"
+  },
+  "keywords": [
+    "campus",
+    "student",
+    "fullstackAPP"
+  ],
+  "author": "Drew Mitchell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dr3mit/SEP/issues"
+  },
+  "homepage": "https://github.com/dr3mit/SEP#readme"
+}
