@@ -9,7 +9,7 @@ const Campus = db.define("campus", {
     }
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: "some url string",
     validate: {
       isUrl: true
