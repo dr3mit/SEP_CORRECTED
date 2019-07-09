@@ -10,7 +10,8 @@ const Campus = db.define("campus", {
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    defaultValue: "some url string",
+    defaultValue:
+      "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
     validate: {
       isUrl: true
     }
@@ -24,7 +25,8 @@ const Campus = db.define("campus", {
   },
   description: {
     type: Sequelize.TEXT,
-    defaultValue: "NO DESCRIPTION ENTERED."
+    defaultValue:
+      "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906"
   }
 });
 

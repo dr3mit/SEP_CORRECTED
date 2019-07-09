@@ -10,13 +10,27 @@
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
     "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
-    "sequelize": "^5.9.0"
+    "sequelize": "^5.9.0",
+    "volleyball": "^1.5.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
+  },
   "scripts": {
-    "test": "start"
+    "start": "npm run start:client & npm run start:server",
+    "start:client": "webpack -w --mode=development",
+    "start:server": "nodemon server --watch server",
+    "build-client": "webpack",
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",
