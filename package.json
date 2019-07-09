@@ -30,10 +30,10 @@
   },
   "scripts": {
     "start": "npm run start:client & npm run start:server",
-    "start:client": "webpack -w --mode=development",
-    "start:server": "nodemon server --watch server",
+    "start:client": "webpack -w --mode=development -o public/bundle.js",
+    "start:server": "nodemon --watch server -q server/index.js",
     "build-client": "webpack",
-    "seed": "node seed.js"
+    "seed": "node server/syncAndSeed.js"
   },
   "repository": {
     "type": "git",
