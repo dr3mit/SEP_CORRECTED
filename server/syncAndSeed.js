@@ -1,12 +1,8 @@
 const { db } = require("./server/index");
 const { Student } = require("./models/students");
 const { Campus } = require("./models/campuses");
-const { app, PORT } = require("./server/server");
+const { app } = require("./server/server");
 const chalk = require("chalk");
-
-console.log(
-  chalk.green("---_______ATTEMPTING TO START SERVER AND APP_______---")
-);
 
 db.authenticate()
   .then(() => {
@@ -23,11 +19,6 @@ Campus.hasMany(Student);
 Student.belongsTo(Campus);
 
 db.sync({ force: true })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(chalk.green(`App is listening on port ${PORT}`));
-    });
-  })
   .then(() => {
     Student.create({
       firstName: "drew",
