@@ -37,7 +37,7 @@ app.get("/", (req, res) =>
   res.send(
     `App is running but index.html did not post! \n ${timeConverter(
       Date.now() - firstRunDate
-    )} seconds since first running.`
+    )} since first running.`
   )
 );
 

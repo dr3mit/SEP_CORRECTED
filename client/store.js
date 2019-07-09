@@ -1,12 +1,12 @@
 import { applyMiddleware, createStore } from "redux";
 import loggerMiddleware from "redux-logger";
 import thunkMiddleware from "redux-thunk";
-import Axios from "axios";
+import axios from "axios";
 
 //intial state
 const intialState = {
-  campuses: {},
-  students: {},
+  campuses: [],
+  students: [],
   campus: "",
   student: ""
 };
@@ -100,7 +100,8 @@ export const showEnrolledStudents = enrolledStudents => {
 //thunks
 
 export const getStudents = () => dispatch =>
-  Axios.get("/api/students")
+  axios
+    .get("/api/students")
     .then(res => res.data)
     .then(students => dispatch(showStudents(students)))
     .catch(e => console.error(e));
@@ -115,17 +116,17 @@ export const getEnrolledStudents = dispatch => () => {};
 const campusesReducer = (campuses, action) => {
   switch (action.type) {
     case ADD_CAMPUS:
-      return {};
+      return [...campuses, action.campus];
     case DELETE_CAMPUS:
       return {};
     case UPDATE_CAMPUS:
       return {};
-    case SHOW_CAMPUS:
-      return {};
-    case SHOW_CAMPUSES:
-      return {};
-    case SHOW_ENROLLED_STUDENTS:
-      return {};
+    // case SHOW_CAMPUS:
+    //   return {};
+    // case SHOW_CAMPUSES:
+    //   return {};
+    // case SHOW_ENROLLED_STUDENTS:
+    //   return {};
     default:
       return campuses;
   }
@@ -133,7 +134,7 @@ const campusesReducer = (campuses, action) => {
 const studentReducer = (student, action) => {
   switch (action.type) {
     case ADD_STUDENT:
-      return {};
+      return [...students, action.student];
     case ENROLL_STUDENT:
       return {};
     case REMOVE_STUDENT:
@@ -142,10 +143,10 @@ const studentReducer = (student, action) => {
       return {};
     case UPDATE_STUDENT:
       return {};
-    case SHOW_STUDENT:
-      return {};
-    case SHOW_STUDENTS:
-      return {};
+    // case SHOW_STUDENT:
+    //   return {};
+    // case SHOW_STUDENTS:
+    //   return {};
     default:
       return student;
   }
@@ -158,3 +159,5 @@ const Store = createStore(
   rootReducer,
   applyMiddleware(loggerMiddleware, thunkMiddleware)
 );
+
+export default Store;
