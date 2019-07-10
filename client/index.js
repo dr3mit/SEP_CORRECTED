@@ -6,7 +6,8 @@ import store from "./store";
 import { getStudents, getCampuses } from "./store";
 import Campuses from "./components/Campus";
 import Students from "./components/Student";
-//import Router from "./router";
+import Navbar from "./components/Navbar";
+import Router from "react-router-dom";
 
 const appDiv = document.getElementById("app");
 
@@ -15,14 +16,15 @@ class HomePage extends Component {
     super();
   }
 
-  componentDidMount() {
-    store.dispatch(getStudents());
-    store.dispatch(getCampuses());
-  }
+  // componentDidMount() {
+  //   store.dispatch(getStudents());
+  //   store.dispatch(getCampuses());
+  // }
 
   render() {
     return (
       <Provider store={store}>
+        <Navbar />
         <Campuses />
         <Students />
       </Provider>

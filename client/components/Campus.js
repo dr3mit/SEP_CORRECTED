@@ -16,7 +16,9 @@ const Campus = props => {
             return (
               <tr key={idx}>
                 <td>Campus name: {campus.name}.</td>
-                <td>Campus Image: {campus.imageUrl}</td>
+                <td>
+                  Campus Image: <img src={campus.imageUrl} />
+                </td>
               </tr>
             );
           })}
