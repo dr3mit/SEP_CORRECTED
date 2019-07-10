@@ -10,13 +10,17 @@ const Student = props => {
   return (
     <div>
       <table>
-        {props.students.map(student => {
-          return (
-            <tr>
-              <td>Student name: {student.name}.</td>
-            </tr>
-          );
-        })}
+        <tbody>
+          {props.students.map((student, idx) => {
+            return (
+              <tr key={idx}>
+                <td>
+                  Student name: {`${student.firstName} ${student.lastName}`}.
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );

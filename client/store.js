@@ -3,14 +3,7 @@ import loggerMiddleware from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import axios from "axios";
 
-//intial state
-const intialState = {
-  campuses: [],
-  students: [],
-  campus: "",
-  student: ""
-};
-//action constan
+//action constants
 const ADD_STUDENT = "ADD_STUDENT";
 const ADD_CAMPUS = "ADD_CAMPUS";
 const ENROLL_STUDENT = "ENROLL_STUDENT";
@@ -127,12 +120,12 @@ const campusesReducer = (campuses = [], action) => {
       return {};
     case UPDATE_CAMPUS:
       return {};
-    // case SHOW_CAMPUS:
-    //   return {};
-    // case SHOW_CAMPUSES:
-    //   return {};
-    // case SHOW_ENROLLED_STUDENTS:
-    //   return {};
+    case SHOW_CAMPUS:
+      return action.campus;
+    case SHOW_CAMPUSES:
+      return action.campuses;
+    case SHOW_ENROLLED_STUDENTS:
+      return action.campus.students;
     default:
       return campuses;
   }
@@ -149,10 +142,10 @@ const studentsReducer = (students = [], action) => {
       return {};
     case UPDATE_STUDENT:
       return {};
-    // case SHOW_STUDENT:
-    //   return {};
-    // case SHOW_STUDENTS:
-    //   return {};
+    case SHOW_STUDENT:
+      return action.student;
+    case SHOW_STUDENTS:
+      return action.students;
     default:
       return students;
   }

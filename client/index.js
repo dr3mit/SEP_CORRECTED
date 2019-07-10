@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import Main from "./components/Main";
+//import Main from "./components/Main";
 import { getStudents, getCampuses } from "./store";
+import Campuses from "./components/Campus";
+import Students from "./components/Student";
 //import Router from "./router";
 
 const appDiv = document.getElementById("app");
@@ -21,7 +23,8 @@ class HomePage extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Main />
+        <Campuses />
+        <Students />
       </Provider>
     );
   }

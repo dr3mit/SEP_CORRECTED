@@ -11,13 +11,16 @@ const Campus = props => {
   return (
     <div>
       <table>
-        {props.campuses.map(campus => {
-          return (
-            <tr>
-              <td>Campus name: {campus.name}.</td>
-            </tr>
-          );
-        })}
+        <tbody>
+          {props.campuses.map((campus, idx) => {
+            return (
+              <tr key={idx}>
+                <td>Campus name: {campus.name}.</td>
+                <td>Campus Image: {campus.imageUrl}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
