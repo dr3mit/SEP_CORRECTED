@@ -1,8 +1,16 @@
-export default () => {
+import React from "react";
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return {
+    campuses: state.campuses,
+    students: state.students
+  };
+};
+const Student = props => {
   return (
     <div>
       <table>
-        {props.Students.map(student => {
+        {props.students.map(student => {
           return (
             <tr>
               <td>Student name: {student.name}.</td>
@@ -13,3 +21,5 @@ export default () => {
     </div>
   );
 };
+
+export default connect(mapStateToProps)(Student);

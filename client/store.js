@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, combineReducers } from "redux";
 import loggerMiddleware from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import axios from "axios";
@@ -106,14 +106,20 @@ export const getStudents = () => dispatch =>
     .then(students => dispatch(showStudents(students)))
     .catch(e => console.error(e));
 
-export const getCampuses = () => dispatch => {};
+export const getCampuses = () => dispatch => {
+  axios
+    .get("/api/campuses")
+    .then(res => res.data)
+    .then(campuses => dispatch(showCampuses(campuses)))
+    .catch(e => console.error(e));
+};
 export const getStudent = () => dispatch => {};
 export const getCampus = () => dispatch => {};
 export const getEnrolledStudents = dispatch => () => {};
 
 //subReducers
 
-const campusesReducer = (campuses, action) => {
+const campusesReducer = (campuses = [], action) => {
   switch (action.type) {
     case ADD_CAMPUS:
       return [...campuses, action.campus];
@@ -131,7 +137,7 @@ const campusesReducer = (campuses, action) => {
       return campuses;
   }
 };
-const studentReducer = (student, action) => {
+const studentsReducer = (students = [], action) => {
   switch (action.type) {
     case ADD_STUDENT:
       return [...students, action.student];
@@ -148,12 +154,15 @@ const studentReducer = (student, action) => {
     // case SHOW_STUDENTS:
     //   return {};
     default:
-      return student;
+      return students;
   }
 };
 
 //combineReducers
-//---->TODO combine reducers import
+const rootReducer = combineReducers({
+  campuses: campusesReducer,
+  students: studentsReducer
+});
 
 const Store = createStore(
   rootReducer,

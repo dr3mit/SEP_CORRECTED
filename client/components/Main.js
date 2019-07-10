@@ -1,16 +1,12 @@
-import { component } from "react";
+import React from "React";
 import Campuses from "./Campus";
 import Students from "./Student";
 
-export default class Main extends component {
-  render() {
-    return (
-      <body>
-        <div>
-          <Campuses />
-          <Students />
-        </div>
-      </body>
-    );
-  }
-}
+export default props => {
+  return (
+    <div>
+      <Campuses />
+      <Students />
+    </div>
+  );
+};

@@ -1,5 +1,5 @@
 const express = require("express");
-const chalk = require('chalk');
+const chalk = require("chalk");
 const app = express();
 const PORT = 3000;
 const volleyball = require("volleyball");
@@ -27,7 +27,6 @@ app.use(express.json());
 app.use(volleyball);
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-
 app.use("/api", require("./api"));
 
 app.use("*", (req, res, next) =>
@@ -35,13 +34,13 @@ app.use("*", (req, res, next) =>
 );
 
 app.get("/", (req, res) =>
-  res.send(
-    `App is running but index.html did not post! \n ${timeConverter(
-      Date.now() - firstRunDate
-    )} since first running.`
-  )
+  res.send(` ${timeConverter(Date.now() - firstRunDate)} since first running.`)
 );
 
 app.listen(PORT, () => {
-  console.log(chalk.greenBright('\n', 'Application started on port: '), chalk.yellow(PORT), '\n');
+  console.log(
+    chalk.greenBright("\n", "Application started on port: "),
+    chalk.yellow(PORT),
+    "\n"
+  );
 });
