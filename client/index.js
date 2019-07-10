@@ -2,31 +2,43 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-//import Main from "./components/Main";
 import { getStudents, getCampuses } from "./store";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Campuses from "./components/Campus";
 import Students from "./components/Student";
-import Navbar from "./components/Navbar";
-import Router from "react-router-dom";
+//import Navbar from "./components/Navbar";
 
 const appDiv = document.getElementById("app");
-
 class HomePage extends Component {
   constructor() {
     super();
   }
 
-  // componentDidMount() {
-  //   store.dispatch(getStudents());
-  //   store.dispatch(getCampuses());
-  // }
+  componentDidMount() {
+    store.dispatch(getStudents());
+    store.dispatch(getCampuses());
+  }
 
   render() {
     return (
       <Provider store={store}>
-        <Navbar />
-        <Campuses />
-        <Students />
+        <Router>
+          <span> Navbar: </span>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/campuses">Campuses</Link>
+            </li>
+            <li>
+              <Link to="/students">Students</Link>
+            </li>
+          </ul>
+
+          <Route path="/campuses" component={() => <Campuses />} />
+          <Route path="/students" component={() => <Students />} />
+        </Router>
       </Provider>
     );
   }

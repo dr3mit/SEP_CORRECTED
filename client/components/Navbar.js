@@ -1,30 +1,27 @@
 import React from "react";
 import store, { getStudents, getCampuses } from "../store";
-// import Campuses from "./Campus";
-// import Students from "./Student";
-let campusesFlag = false;
-let studentsFlag = false;
+import Campuses from "./Campus";
+import Students from "./Student";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HomePage } from "../index";
 export default props => {
   return (
-    <nav>
+    <Router>
       <span> Navbar: </span>
-      <span
-        onClick={event => {
-          event.preventDefault();
-          store.dispatch(getCampuses());
-        }}
-      >
-        All Campuses
-      </span>
-      <span>{"\n\t"}</span>
-      <span
-        onClick={event => {
-          event.preventDefault();
-          store.dispatch(getStudents());
-        }}
-      >
-        All Students
-      </span>
-    </nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/campuses">Campuses</Link>
+        </li>
+        <li>
+          <Link to="/students">Students</Link>
+        </li>
+      </ul>
+      <Route exact path="/" component={() => <HomePage />} />
+      <Route path="/campuses" component={() => <Campuses />} />
+      <Route path="/students" component={() => <Students />} />
+    </Router>
   );
 };

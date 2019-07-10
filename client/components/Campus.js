@@ -14,7 +14,7 @@ const Campus = props => {
         <tbody>
           {props.campuses.map((campus, idx) => {
             return (
-              <tr key={idx}>
+              <tr key={idx} onClick={() => {}}>
                 <td>Campus name: {campus.name}.</td>
                 <td>
                   Campus Image: <img src={campus.imageUrl} />

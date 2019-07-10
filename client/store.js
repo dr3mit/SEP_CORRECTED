@@ -106,8 +106,20 @@ export const getCampuses = () => dispatch => {
     .then(campuses => dispatch(showCampuses(campuses)))
     .catch(e => console.error(e));
 };
-export const getStudent = () => dispatch => {};
-export const getCampus = () => dispatch => {};
+export const getStudent = id => dispatch => {
+  axios
+    .get(`api/student/${id}`)
+    .then(res => res.data)
+    .then(student => dispatch(showStudent(student)))
+    .catch(e => console.error(e));
+};
+export const getCampus = id => dispatch => {
+  axios
+    .get(`api/campus/${id}`)
+    .then(res => res.data)
+    .then(campus => dispatch(showCampus(campus)))
+    .catch(e => console.error(e));
+};
 export const getEnrolledStudents = dispatch => () => {};
 
 //subReducers

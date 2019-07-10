@@ -112,7 +112,8 @@ var Campus = function Campus(props) {
   console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.campuses.map(function (campus, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-      key: idx
+      key: idx,
+      onClick: function onClick() {}
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus name: ", campus.name, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus Image: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: campus.imageUrl
     })));
@@ -120,40 +121,6 @@ var Campus = function Campus(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Campus));
-
-/***/ }),
-
-/***/ "./client/components/Navbar.js":
-/*!*************************************!*\
-  !*** ./client/components/Navbar.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./client/store.js");
-
- // import Campuses from "./Campus";
-// import Students from "./Student";
-
-var campusesFlag = false;
-var studentsFlag = false;
-/* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " Navbar: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    onClick: function onClick(event) {
-      event.preventDefault();
-      _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_1__["getCampuses"])());
-    }
-  }, "All Campuses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\n\t"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    onClick: function onClick(event) {
-      event.preventDefault();
-      _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_1__["getStudents"])());
-    }
-  }, "All Students"));
-});
 
 /***/ }),
 
@@ -182,7 +149,8 @@ var mapStateToProps = function mapStateToProps(state) {
 var Student = function Student(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.students.map(function (student, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-      key: idx
+      key: idx,
+      onClick: function onClick() {}
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Student name: ", "".concat(student.firstName, " ").concat(student.lastName), "."));
   }))));
 };
@@ -206,10 +174,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./client/store.js");
-/* harmony import */ var _components_Campus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Campus */ "./client/components/Campus.js");
-/* harmony import */ var _components_Student__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Student */ "./client/components/Student.js");
-/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Navbar */ "./client/components/Navbar.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Campus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Campus */ "./client/components/Campus.js");
+/* harmony import */ var _components_Student__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Student */ "./client/components/Student.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -231,12 +198,11 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- //import Main from "./components/Main";
 
 
 
 
-
+ //import Navbar from "./components/Navbar";
 
 var appDiv = document.getElementById("app");
 
@@ -249,18 +215,36 @@ function (_Component) {
     _classCallCheck(this, HomePage);
 
     return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this));
-  } // componentDidMount() {
-  //   store.dispatch(getStudents());
-  //   store.dispatch(getCampuses());
-  // }
-
+  }
 
   _createClass(HomePage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["getStudents"])());
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["getCampuses"])());
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
         store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Campus__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Student__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " Navbar: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/"
+      }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/campuses"
+      }, "Campuses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/students"
+      }, "Students"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        path: "/campuses",
+        component: function component() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Campus__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        path: "/students",
+        component: function component() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Student__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+        }
+      })));
     }
   }]);
 
@@ -425,11 +409,27 @@ var getCampuses = function getCampuses() {
     });
   };
 };
-var getStudent = function getStudent() {
-  return function (dispatch) {};
+var getStudent = function getStudent(id) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("api/student/".concat(id)).then(function (res) {
+      return res.data;
+    }).then(function (student) {
+      return dispatch(showStudent(student));
+    })["catch"](function (e) {
+      return console.error(e);
+    });
+  };
 };
-var getCampus = function getCampus() {
-  return function (dispatch) {};
+var getCampus = function getCampus(id) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("api/campus/".concat(id)).then(function (res) {
+      return res.data;
+    }).then(function (campus) {
+      return dispatch(showCampus(campus));
+    })["catch"](function (e) {
+      return console.error(e);
+    });
+  };
 };
 var getEnrolledStudents = function getEnrolledStudents(dispatch) {
   return function () {};
