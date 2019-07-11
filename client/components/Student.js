@@ -13,7 +13,14 @@ const Student = props => {
         <tbody>
           {props.students.map((student, idx) => {
             return (
-              <tr key={idx} onClick={() => {}}>
+              <tr
+                key={idx}
+                onClick={() => {
+                  console.log(
+                    `Student name: ${student.firstName} ${student.lastName}`
+                  );
+                }}
+              >
                 <td>
                   Student name: {`${student.firstName} ${student.lastName}`}.
                 </td>

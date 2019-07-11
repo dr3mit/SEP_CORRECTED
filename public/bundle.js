@@ -98,6 +98,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _OneCampus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OneCampus */ "./client/components/OneCampus.js");
+
+
 
 
 
@@ -112,15 +116,51 @@ var Campus = function Campus(props) {
   console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.campuses.map(function (campus, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-      key: idx,
-      onClick: function onClick() {}
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus name: ", campus.name, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus Image: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      key: idx
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      to: "/campus/".concat(idx + 1)
+    }, "Campus name: ", campus.name, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+      path: "/campus/".concat(idx),
+      component: function component() {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OneCampus__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+      }
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus Image: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: campus.imageUrl
     })));
   }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Campus));
+
+/***/ }),
+
+/***/ "./client/components/OneCampus.js":
+/*!****************************************!*\
+  !*** ./client/components/OneCampus.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    campus: state.campus //students: state.campus.students
+
+  };
+};
+
+var OneCampus = function OneCampus(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "testing", props.campus.name, props.campus.imageUrl);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(OneCampus));
 
 /***/ }),
 
@@ -150,7 +190,9 @@ var Student = function Student(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.students.map(function (student, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: idx,
-      onClick: function onClick() {}
+      onClick: function onClick() {
+        console.log("Student name: ".concat(student.firstName, " ").concat(student.lastName));
+      }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Student name: ", "".concat(student.firstName, " ").concat(student.lastName), "."));
   }))));
 };
@@ -228,7 +270,7 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
         store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " Navbar: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
       }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/campuses"

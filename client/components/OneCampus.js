@@ -2,15 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 const mapStateToProps = state => {
   return {
-    campus: state.campuses,
-    students: state.campus.students
+    campus: state.campus
+    //students: state.campus.students
   };
 };
 
 const OneCampus = props => {
   return (
     <div>
-      {props.campus.name};{props.campus.imageUrl};
+      testing
+      {props.campus.name}
+      {props.campus.imageUrl}
     </div>
   );
 };

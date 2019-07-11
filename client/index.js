@@ -23,7 +23,6 @@ class HomePage extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <span> Navbar: </span>
           <ul>
             <li>
               <Link to="/">Home</Link>
