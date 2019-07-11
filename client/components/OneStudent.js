@@ -6,12 +6,18 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = {};
+
 const OneStudent = props => {
   return (
     <div>
-      {props.student.firstName};{props.student.lastName};
+      {props.student.firstName}
+      {props.student.lastName}
     </div>
   );
 };
 
-export default connect(mapStateToProps)(OneStudent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OneStudent);

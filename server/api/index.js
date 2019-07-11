@@ -22,7 +22,9 @@ router.get("/campuses", (req, res) => {
 
 router.get("/campus/:id", (req, res) => {
   return Campus.findByPk(req.params.id)
-    .then(campus => res.send(campus))
+    .then(campus => {
+      res.send(campus);
+    })
     .catch(e => res.send(e));
 });
 module.exports = router;

@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 const mapStateToProps = state => {
   return {
-    campus: state.campus
+    campus: state.campuses
     //students: state.campus.students
   };
 };
 
 const OneCampus = props => {
+  console.log(props);
   return (
     <div>
       testing

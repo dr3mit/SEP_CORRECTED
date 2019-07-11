@@ -2,14 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import OneCampus from "./OneCampus";
+import { getCampus } from "../store";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
     students: state.students
   };
 };
-const Campus = props => {
-  console.log(props);
+export const Campus = props => {
+  //console.log(props);
   return (
     <div>
       <table>
@@ -21,8 +22,9 @@ const Campus = props => {
                   <Link to={`/campus/${idx + 1}`}>
                     Campus name: {campus.name}.
                   </Link>
+
                   <Route
-                    path={`/campus/${idx}`}
+                    path={`/campus/${idx + 1}`}
                     component={() => <OneCampus />}
                   />
                 </td>

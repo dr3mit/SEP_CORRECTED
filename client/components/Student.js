@@ -6,7 +6,7 @@ const mapStateToProps = state => {
     students: state.students
   };
 };
-const Student = props => {
+export const Student = props => {
   return (
     <div>
       <table>

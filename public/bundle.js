@@ -90,16 +90,19 @@
 /*!*************************************!*\
   !*** ./client/components/Campus.js ***!
   \*************************************/
-/*! exports provided: default */
+/*! exports provided: Campus, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Campus", function() { return Campus; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _OneCampus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OneCampus */ "./client/components/OneCampus.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store */ "./client/store.js");
+
 
 
 
@@ -113,14 +116,14 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var Campus = function Campus(props) {
-  console.log(props);
+  //console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.campuses.map(function (campus, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: idx
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       to: "/campus/".concat(idx + 1)
     }, "Campus name: ", campus.name, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-      path: "/campus/".concat(idx),
+      path: "/campus/".concat(idx + 1),
       component: function component() {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OneCampus__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       }
@@ -129,7 +132,6 @@ var Campus = function Campus(props) {
     })));
   }))));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Campus));
 
 /***/ }),
@@ -151,12 +153,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    campus: state.campus //students: state.campus.students
+    campus: state.campuses //students: state.campus.students
 
   };
 };
 
 var OneCampus = function OneCampus(props) {
+  console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "testing", props.campus.name, props.campus.imageUrl);
 };
 
@@ -168,11 +171,12 @@ var OneCampus = function OneCampus(props) {
 /*!**************************************!*\
   !*** ./client/components/Student.js ***!
   \**************************************/
-/*! exports provided: default */
+/*! exports provided: Student, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Student", function() { return Student; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -196,7 +200,6 @@ var Student = function Student(props) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Student name: ", "".concat(student.firstName, " ").concat(student.lastName), "."));
   }))));
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Student));
 
 /***/ }),
@@ -27941,7 +27944,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

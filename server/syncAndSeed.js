@@ -1,7 +1,6 @@
-const { db } = require("./server/index");
+const { db } = require("./db");
 const { Student } = require("./models/students");
 const { Campus } = require("./models/campuses");
-const { app } = require("./server/server");
 const chalk = require("chalk");
 
 db.authenticate()
@@ -20,42 +19,6 @@ Student.belongsTo(Campus);
 
 db.sync({ force: true })
   .then(() => {
-    Student.create({
-      firstName: "drew",
-      lastName: "mitchell",
-      email: "dr3mit@gmail.com",
-      imageUrl:
-        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
-      gpa: 3.9
-    }).catch(e => console.error(e));
-
-    Student.create({
-      firstName: "dexter",
-      lastName: "vonMitchell",
-      email: "derslowhammer@gmail.com",
-      imageUrl:
-        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
-      gpa: 4.0
-    }).catch(e => console.error(e));
-
-    Student.create({
-      firstName: "nick",
-      lastName: "marton",
-      email: "nickmartonthedestroyer@gmail.com",
-      imageUrl:
-        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
-      gpa: 3.9
-    }).catch(e => console.error(e));
-
-    Student.create({
-      firstName: "john",
-      lastName: "mazza",
-      email: "angryInterveiwerFromFrat@gmail.com",
-      imageUrl:
-        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
-      gpa: 3.9
-    }).catch(e => console.error(e));
-
     Campus.create({
       name: "RPI",
       imageUrl:
@@ -71,6 +34,50 @@ db.sync({ force: true })
       address: "rochester, ny",
       description: "sister alda mater"
     }).catch(e => console.error(e));
+
+    Student.create({
+      firstName: "drew",
+      lastName: "mitchell",
+      email: "dr3mit@gmail.com",
+      imageUrl:
+        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
+      gpa: 3.9
+    })
+      .then(student => student.setCampus(2))
+      .catch(e => console.error(e));
+
+    Student.create({
+      firstName: "dexter",
+      lastName: "vonMitchell",
+      email: "derslowhammer@gmail.com",
+      imageUrl:
+        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
+      gpa: 4.0
+    })
+      .then(student => student.setCampus(2))
+      .catch(e => console.error(e));
+
+    Student.create({
+      firstName: "nick",
+      lastName: "marton",
+      email: "nickmartonthedestroyer@gmail.com",
+      imageUrl:
+        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
+      gpa: 3.9
+    })
+      .then(student => student.setCampus(1))
+      .catch(e => console.error(e));
+
+    Student.create({
+      firstName: "john",
+      lastName: "mazza",
+      email: "angryInterveiwerFromFrat@gmail.com",
+      imageUrl:
+        "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiwpoCBjpfjAhWom-AKHe1UDkUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.techspot.com%2Fnews%2F76272-google-engineers-working-replacement-url.html&psig=AOvVaw3NUA6jZi_kCqtDHy7dEItE&ust=1562186944475906",
+      gpa: 3.9
+    })
+      .then(student => student.setCampus(1))
+      .catch(e => console.error(e));
   })
   .catch(e =>
     console.error(chalk.yellow("-----____db failed to sync____------"), e)
