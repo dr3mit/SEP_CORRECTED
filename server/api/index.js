@@ -10,7 +10,10 @@ router.get("/students", (req, res) => {
 
 router.get("/student/:id", (req, res) => {
   return Student.findByPk(req.params.id)
-    .then(student => res.send(student))
+    .then(student => {
+      console.log(student);
+      res.send(student);
+    })
     .catch(e => res.send(e));
 });
 

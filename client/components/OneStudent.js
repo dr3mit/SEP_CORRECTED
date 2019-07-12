@@ -2,22 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 const mapStateToProps = state => {
   return {
-    student: state.student
+    students: state.students
   };
 };
 
-const mapDispatchToProps = {};
-
 const OneStudent = props => {
+  let student = props.students.filter(student =>
+    student.id === props.id ? true : false
+  )[0];
+  console.log("student: ", props);
   return (
     <div>
-      {props.student.firstName}
-      {props.student.lastName}
+      <table>
+        <tbody>
+          <tr>
+            <td>{student.firstName}</td>
+          </tr>
+          <tr>
+            <td>{student.gpa}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OneStudent);
+export default connect(mapStateToProps)(OneStudent);

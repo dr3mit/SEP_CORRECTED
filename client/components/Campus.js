@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import OneCampus from "./OneCampus";
-import { getCampus } from "../store";
+import { getCampuses } from "../store";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -15,25 +15,27 @@ export const Campus = props => {
     <div>
       <table>
         <tbody>
-          {props.campuses.map((campus, idx) => {
-            return (
-              <tr key={idx}>
-                <td>
-                  <Link to={`/campus/${idx + 1}`}>
-                    Campus name: {campus.name}.
-                  </Link>
+          <Router>
+            {props.campuses.map(campus => {
+              return (
+                <tr key={campus.id}>
+                  <td>
+                    <Link to={`/campus/${campus.id}`}>
+                      Campus name: {campus.name}.
+                    </Link>
 
-                  <Route
-                    path={`/campus/${idx + 1}`}
-                    component={() => <OneCampus />}
-                  />
-                </td>
-                <td>
-                  Campus Image: <img src={campus.imageUrl} />
-                </td>
-              </tr>
-            );
-          })}
+                    <Route
+                      path={"/campus/" + String(campus.id)}
+                      component={() => <OneCampus />}
+                    />
+                  </td>
+                  <td>
+                    Campus Image: <img src={campus.imageUrl} />
+                  </td>
+                </tr>
+              );
+            })}
+          </Router>
         </tbody>
       </table>
     </div>
