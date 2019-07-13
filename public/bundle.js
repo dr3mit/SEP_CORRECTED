@@ -153,15 +153,40 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    campuses: state.campuses //students: state.campus.students
-
+    campuses: state.campuses,
+    students: state.students
   };
 };
 
 var OneCampus = function OneCampus(props) {
-  console.log(props.campuses);
-  var campus = props.campuses[0];
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.description)))));
+  var Name = "Name: ";
+  var Email = "Email: ";
+  var studentsStr = "Students: \n";
+  var campusId = Number(window.location.pathname[window.location.pathname.length - 1]);
+  var students = props.students.filter(function (student) {
+    return student.campusId === campusId ? true : false;
+  });
+
+  if (students.length < 1) {
+    students = [{
+      firstName: "No Enrolled Students"
+    }];
+    Name = "";
+    Email = "";
+    studentsStr = "";
+  }
+
+  var campus = props.campuses.filter(function (campus) {
+    return campus.id === campusId ? true : false;
+  })[0]; //console.log(students);
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, studentsStr)), students.map(function (student, idx) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      key: student.id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Name, " ", student.firstName, " ", student.lastName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Email, " ", student.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: student.imageUrl
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.gpa));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(OneCampus));
@@ -185,7 +210,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    students: state.students
+    students: state.students,
+    campuses: state.campuses
   };
 };
 
@@ -193,8 +219,16 @@ var OneStudent = function OneStudent(props) {
   var student = props.students.filter(function (student) {
     return student.id === props.id ? true : false;
   })[0];
-  console.log("student: ", props);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.firstName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.gpa)))));
+  var campus = props.campuses.filter(function (campus) {
+    return campus.id === student.campusId ? true : false;
+  })[0]; //console.log("campus: ", campus);
+
+  if (!campus) campus = {
+    name: "Not Enrolled at a campus."
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "".concat(student.firstName, " ").concat(student.lastName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: student.imageUrl
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.gpa)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(OneStudent));

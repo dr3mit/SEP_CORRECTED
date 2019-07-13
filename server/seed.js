@@ -19,8 +19,7 @@ db.sync({ force: true })
   .then(() => {
     let RPI = Campus.create({
       name: "RPI",
-      imageUrl:
-        "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2F1488922212%2Fvirginia-university-of-virginia-PRETTYCAMPUS0317.jpg%3Fitok%3DHx55kW2P&imgrefurl=https%3A%2F%2Fwww.travelandleisure.com%2Fattractions%2Fcolleges-universities%2Fmost-beautiful-colleges-every-state&docid=MctECUBYP40LFM&tbnid=hR1fAh16w-kFjM%3A&vet=10ahUKEwiw2ZC8kZfjAhVDc98KHQvCAfcQMwh-KAAwAA..i&w=1600&h=1000&bih=696&biw=1200&q=college%20campus&ved=0ahUKEwiw2ZC8kZfjAhVDc98KHQvCAfcQMwh-KAAwAA&iact=mrc&uact=8",
+      imageUrl: "https://ibb.co/rHJK7xz",
       address: "troy, ny",
       description: "second mit"
     }).catch(e => console.error(e));
@@ -76,30 +75,22 @@ db.sync({ force: true })
     })
       .then(student => {
         student.setCampus(2);
-        student
-          .getCampus()
-          .then(campus => console.log(";;;\n\n ", campus, "\n\n ;;;;"));
+        student.getCampus().then();
       })
       .catch(e => console.error(e));
 
     RIT.then(rit => rit.addStudent(3))
       .then(rit => rit.addStudent(4))
-      .then(rit =>
-        rit
-          .getStudents()
-          .then(students => console.log("$$$$$$$$$$$$$$$$$$$", students))
-      )
+      .then(rit => rit.getStudents().then())
       .catch(e => console.log(e));
 
     RPI.then(rpi => rpi.addStudent(1))
       .then(rpi => rpi.addStudent(2))
-      .then(rpi =>
-        rpi
-          .getStudents()
-          .then(students => console.log("###################", students))
-      )
+      .then(rpi => rpi.getStudents().then())
       .catch(e => console.log(e));
   })
   .catch(e =>
     console.error(chalk.yellow("-----____db failed to sync____------"), e)
   );
+
+module.exports = { Student, Campus };
