@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import OneStudent from "./OneStudent";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -44,20 +46,30 @@ const OneCampus = props => {
           <tr>
             <td>{studentsStr}</td>
           </tr>
-          {students.map((student, idx) => (
-            <tr key={student.id}>
-              <td>
-                {Name} {student.firstName} {student.lastName}
-              </td>
-              <td>
-                {Email} {student.email}
-              </td>
-              <td>
-                <img src={student.imageUrl} />
-              </td>
-              <td>{student.gpa}</td>
-            </tr>
-          ))}
+          <Router>
+            {students.map(student => (
+              <tr key={student.id}>
+                <td>
+                  <Link
+                    to={`${window.location.pathname}/student/${student.id}`}
+                  >
+                    {Name} {student.firstName} {student.lastName}
+                  </Link>
+                  <Route
+                    path={`${window.location.pathname}/student/${student.id}`}
+                    component={() => <OneStudent />}
+                  />
+                </td>
+                <td>
+                  {Email} {student.email}
+                </td>
+                <td>
+                  <img src={student.imageUrl} />
+                </td>
+                <td>{student.gpa}</td>
+              </tr>
+            ))}
+          </Router>
         </tbody>
       </table>
     </div>

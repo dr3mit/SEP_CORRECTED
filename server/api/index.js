@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Student, Campus } = require("../seed");
+const { Student, Campus } = require("../models");
 
 router.get("/students", (req, res) => {
   return Student.findAll()

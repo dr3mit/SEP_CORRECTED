@@ -1,6 +1,5 @@
 const { db } = require("./db");
-const { Student } = require("./models/students");
-const { Campus } = require("./models/campuses");
+const { Student, Campus } = require("./models");
 const chalk = require("chalk");
 
 db.authenticate()
@@ -13,8 +12,7 @@ db.authenticate()
       e
     )
   );
-Campus.hasMany(Student);
-Student.belongsTo(Campus);
+
 db.sync({ force: true })
   .then(() => {
     let RPI = Campus.create({

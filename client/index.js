@@ -34,7 +34,11 @@ class HomePage extends Component {
               <Link to="/students">Students</Link>
             </li>
           </ul>
-
+          <Route
+            exact
+            path="/"
+            component={() => <div>Please choose Campuses or Students.</div>}
+          />
           <Route path="/campuses" component={() => <Campuses />} />
           <Route path="/students" component={() => <Students />} />
         </Router>
