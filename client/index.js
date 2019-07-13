@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { getStudents, getCampuses } from "./store";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import Campuses from "./components/Campus";
 import Students from "./components/Student";
 //import Navbar from "./components/Navbar";
@@ -34,13 +35,15 @@ class HomePage extends Component {
               <Link to="/students">Students</Link>
             </li>
           </ul>
-          <Route
-            exact
-            path="/"
-            component={() => <div>Please choose Campuses or Students.</div>}
-          />
-          <Route path="/campuses" component={() => <Campuses />} />
-          <Route path="/students" component={() => <Students />} />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => <div>Please choose Campuses or Students.</div>}
+            />
+            <Route path="/campuses" component={() => <Campuses />} />
+            <Route path="/students" component={() => <Students />} />
+          </Switch>
         </Router>
       </Provider>
     );

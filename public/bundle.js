@@ -182,22 +182,21 @@ var OneCampus = function OneCampus(props) {
 
   var campus = props.campuses.filter(function (campus) {
     return campus.id === campusId ? true : false;
-  })[0]; //console.log(students);
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, studentsStr)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, students.map(function (student) {
+  })[0];
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.address)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, studentsStr)), students.map(function (student) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: student.id
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "".concat(window.location.pathname, "/student/").concat(student.id)
-    }, Name, " ", student.firstName, " ", student.lastName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-      path: "".concat(window.location.pathname, "/student/").concat(student.id),
-      component: function component() {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OneStudent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      onClick: function onClick() {
+        console.log("clicked");
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+          to: "/student/".concat(student.id)
+        });
       }
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Email, " ", student.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    }, Name, " ", student.firstName, " ", student.lastName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, Email, " ", student.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: student.imageUrl
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.gpa));
-  })))));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(OneCampus));
@@ -336,6 +335,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
  //import Navbar from "./components/Navbar";
 
 var appDiv = document.getElementById("app");
@@ -368,7 +368,7 @@ function (_Component) {
         to: "/campuses"
       }, "Campuses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/students"
-      }, "Students"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+      }, "Students"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
         exact: true,
         path: "/",
         component: function component() {
@@ -384,7 +384,7 @@ function (_Component) {
         component: function component() {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Student__WEBPACK_IMPORTED_MODULE_6__["default"], null);
         }
-      })));
+      }))));
     }
   }]);
 

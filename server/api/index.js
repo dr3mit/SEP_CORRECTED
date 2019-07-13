@@ -29,4 +29,26 @@ router.get("/campus/:id", (req, res) => {
     })
     .catch(e => res.send(e));
 });
+
+router.post("/:campus", (req, res) => {
+  return Campus.create({
+    name: "test", //req.body.name
+    imageUrl: "https://ibb.co/rHJK7xz",
+    address: "test",
+    description: "test"
+  })
+    .then(campus => res.send(campus))
+    .catch(e => console.error(e));
+});
+
+router.post("/:student", (req, res) => {
+  return Student.create({
+    name: "test", //req.body.name
+    imageUrl: "https://ibb.co/rHJK7xz", //req.body.imageUrl
+    address: "test",
+    description: "test"
+  })
+    .then(student => res.send(student))
+    .catch(e => console.error(e));
+});
 module.exports = router;

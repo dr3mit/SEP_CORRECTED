@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import OneStudent from "./OneStudent";
 const mapStateToProps = state => {
   return {
@@ -28,7 +33,6 @@ const OneCampus = props => {
   const campus = props.campuses.filter(campus =>
     campus.id === campusId ? true : false
   )[0];
-  //console.log(students);
   return (
     <div>
       <table>
@@ -46,30 +50,26 @@ const OneCampus = props => {
           <tr>
             <td>{studentsStr}</td>
           </tr>
-          <Router>
-            {students.map(student => (
-              <tr key={student.id}>
-                <td>
-                  <Link
-                    to={`${window.location.pathname}/student/${student.id}`}
-                  >
-                    {Name} {student.firstName} {student.lastName}
-                  </Link>
-                  <Route
-                    path={`${window.location.pathname}/student/${student.id}`}
-                    component={() => <OneStudent />}
-                  />
-                </td>
-                <td>
-                  {Email} {student.email}
-                </td>
-                <td>
-                  <img src={student.imageUrl} />
-                </td>
-                <td>{student.gpa}</td>
-              </tr>
-            ))}
-          </Router>
+
+          {students.map(student => (
+            <tr key={student.id}>
+              <td
+                onClick={() => {
+                  console.log("clicked");
+                  return <Redirect to={`/student/${student.id}`} />;
+                }}
+              >
+                {Name} {student.firstName} {student.lastName}
+              </td>
+              <td>
+                {Email} {student.email}
+              </td>
+              <td>
+                <img src={student.imageUrl} />
+              </td>
+              <td>{student.gpa}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
