@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import OneCampus from "./OneCampus";
 import { getCampuses } from "../store";
+import AddCampus from "./AddCampus";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -25,7 +26,7 @@ export const Campus = props => {
                     </Link>
 
                     <Route
-                      path={"/campus/" + String(campus.id)}
+                      path={`/campus/${campus.id}`}
                       component={() => <OneCampus />}
                     />
                   </td>
@@ -38,6 +39,7 @@ export const Campus = props => {
           </Router>
         </tbody>
       </table>
+      <AddCampus />
     </div>
   );
 };

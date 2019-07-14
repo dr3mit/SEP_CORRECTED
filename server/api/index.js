@@ -32,10 +32,10 @@ router.get("/campus/:id", (req, res) => {
 
 router.post("/:campus", (req, res) => {
   return Campus.create({
-    name: "test", //req.body.name
+    name: req.body.name,
     imageUrl: "https://ibb.co/rHJK7xz",
     address: "test",
-    description: "test"
+    description: req.body.description
   })
     .then(campus => res.send(campus))
     .catch(e => console.error(e));

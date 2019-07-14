@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import OneStudent from "./OneStudent";
+import AddStudent from "./AddStudent";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -32,6 +33,7 @@ export const Student = props => {
           </Router>
         </tbody>
       </table>
+      <AddStudent />
     </div>
   );
 };

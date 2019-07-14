@@ -92,6 +92,34 @@ export const showEnrolledStudents = enrolledStudents => {
 };
 //thunks
 
+export const postStudent = data => dispatch => {
+  return axios
+    .post("/api/students", {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      description: data.description
+    })
+    .then(res => {
+      console.log("student:", res);
+      return res.config.data;
+    })
+    .then(student => {
+      console.log("student:", student);
+      dispatch(addStudent(student));
+    })
+    .catch(error => console.log(error));
+};
+
+export const postCampus = data => dispatch => {
+  return axios
+    .post("/api/campuses", { name: data.name, description: data.description })
+    .then(res => res.data)
+    .then(campus => {
+      dispatch(addCampus(campus));
+    })
+    .catch(error => console.log(error));
+};
+
 export const getStudents = () => dispatch =>
   axios
     .get("/api/students")
@@ -100,21 +128,21 @@ export const getStudents = () => dispatch =>
     .catch(e => console.error(e));
 
 export const getCampuses = () => dispatch => {
-  axios
+  return axios
     .get("/api/campuses")
     .then(res => res.data)
     .then(campuses => dispatch(showCampuses(campuses)))
     .catch(e => console.error(e));
 };
 export const getStudent = id => dispatch => {
-  axios
+  return axios
     .get(`api/student/${id}`)
     .then(res => res.data)
     .then(student => dispatch(showStudent(student)))
     .catch(e => console.error(e));
 };
 export const getCampus = id => dispatch => {
-  axios
+  return axios
     .get(`api/campus/${id}`)
     .then(res => res.data)
     .then(campus => dispatch(showCampus(campus)))
