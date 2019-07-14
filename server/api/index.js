@@ -30,7 +30,7 @@ router.get("/campus/:id", (req, res) => {
     .catch(e => res.send(e));
 });
 
-router.post("/:campus", (req, res) => {
+router.post("/campuses", (req, res) => {
   return Campus.create({
     name: req.body.name,
     imageUrl: "https://ibb.co/rHJK7xz",
@@ -41,12 +41,13 @@ router.post("/:campus", (req, res) => {
     .catch(e => console.error(e));
 });
 
-router.post("/:student", (req, res) => {
+router.post("/students", (req, res) => {
   return Student.create({
-    name: "test", //req.body.name
+    firstName: req.body.firstName, //req.body.name
+    lastName: req.body.lastName,
     imageUrl: "https://ibb.co/rHJK7xz", //req.body.imageUrl
-    address: "test",
-    description: "test"
+    email: "test@gmail.com",
+    gpa: 4.0
   })
     .then(student => res.send(student))
     .catch(e => console.error(e));

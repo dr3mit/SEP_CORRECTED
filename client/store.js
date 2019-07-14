@@ -97,14 +97,14 @@ export const postStudent = data => dispatch => {
     .post("/api/students", {
       firstName: data.firstName,
       lastName: data.lastName,
-      description: data.description
+      email: data.email
     })
     .then(res => {
-      console.log("student:", res);
-      return res.config.data;
+      //console.log("student:", res);
+      return res.data;
     })
     .then(student => {
-      console.log("student:", student);
+      //console.log("student:", student);
       dispatch(addStudent(student));
     })
     .catch(error => console.log(error));
@@ -120,13 +120,13 @@ export const postCampus = data => dispatch => {
     .catch(error => console.log(error));
 };
 
-export const getStudents = () => dispatch =>
-  axios
+export const getStudents = () => dispatch => {
+  return axios
     .get("/api/students")
     .then(res => res.data)
     .then(students => dispatch(showStudents(students)))
     .catch(e => console.error(e));
-
+};
 export const getCampuses = () => dispatch => {
   return axios
     .get("/api/campuses")

@@ -8,44 +8,48 @@ const mapSateToProps = state => {
     students: state.students
   };
 };
-
-const mapDispactchToProps = () => {
-  return {};
+let input = { firstName: "", lastName: "", email: "" };
+const findSpace = str =>
+  Array.from(str).filter(letter => (letter === " " ? true : false))[0];
+const mapDispactchToProps = dispatch => {
+  let spaceNum = 0;
+  return {
+    handleChange: event => {
+      event.preventDefault();
+      spaceNum = findSpace(input.firstName);
+      input.lastName = input.firstName.slice(spaceNum);
+      input.firstName = input.firstName.slice(0, spaceNum);
+      dispatch(
+        postStudent({
+          firstName: input.firstName,
+          lastName: input.lastName,
+          email: input.email
+        })
+      );
+      //console.log(input.firstName, input.lastName, input.email);
+    }
+  };
 };
-
-let input = { firstName: "", email: "" };
 
 const AddStudent = props => {
   return (
     <div>
       Add a Student:
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          props.dispatch(
-            postStudent({
-              firstName: input.firstName,
-              lastName: input.firstName,
-              email: input.description
-            })
-          );
-          //console.log(input.name, input.name, input.description);
-        }}
-      >
+      <form onSubmit={props.handleChange}>
         <label> Name: </label>
         <input
           onChange={event => {
             event.preventDefault();
             input.firstName = event.target.value;
-            // console.log(event.target.value);
+            console.log(event.target.value);
           }}
         />
-        <label> Description: </label>
+        <label> Email: </label>
         <input
           onChange={event => {
             event.preventDefault();
-            input.description = event.target.value;
-            //console.log(event.target.value);
+            input.email = event.target.value;
+            console.log(event.target.value);
           }}
         />
         <button>Submit</button>
@@ -54,4 +58,7 @@ const AddStudent = props => {
   );
 };
 
-export default connect(mapSateToProps)(AddStudent);
+export default connect(
+  mapSateToProps,
+  mapDispactchToProps
+)(AddStudent);

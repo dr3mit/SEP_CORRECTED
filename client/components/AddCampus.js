@@ -9,7 +9,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = () => {};
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSubmit: event => {
+      event.preventDefault();
+      dispatch(postCampus({ name: input.name, description: input.desription }));
+      console.log(input);
+    }
+  };
+};
 
 let input = { name: "", desription: "" };
 
@@ -17,21 +25,13 @@ const AddCampus = props => {
   return (
     <div>
       Add a Campus:
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          props.dispatch(
-            postCampus({ name: input.name, description: input.desription })
-          );
-          //console.log(input);
-        }}
-      >
+      <form onSubmit={props.handleSubmit}>
         <label> Name: </label>
         <input
           onChange={event => {
             event.preventDefault();
             input.name = event.target.value;
-            //console.log(event.target.value);
+            console.log(event.target.value);
           }}
         />
         <label> Description: </label>
@@ -39,7 +39,7 @@ const AddCampus = props => {
           onChange={event => {
             event.preventDefault();
             input.description = event.target.value;
-            //console.log(event.target.value);
+            console.log(event.target.value);
           }}
         />
         <button>Submit</button>
@@ -48,4 +48,7 @@ const AddCampus = props => {
   );
 };
 
-export default connect(mapStateToProps)(AddCampus);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddCampus);

@@ -110,7 +110,18 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps() {};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleSubmit: function handleSubmit(event) {
+      event.preventDefault();
+      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postCampus"])({
+        name: input.name,
+        description: input.desription
+      }));
+      console.log(input);
+    }
+  };
+};
 
 var input = {
   name: "",
@@ -119,27 +130,23 @@ var input = {
 
 var AddCampus = function AddCampus(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Add a Campus:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: function onSubmit(event) {
-      event.preventDefault();
-      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postCampus"])({
-        name: input.name,
-        description: input.desription
-      })); //console.log(input);
-    }
+    onSubmit: props.handleSubmit
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Name: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.name = event.target.value; //console.log(event.target.value);
+      input.name = event.target.value;
+      console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Description: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.description = event.target.value; //console.log(event.target.value);
+      input.description = event.target.value;
+      console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AddCampus));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AddCampus));
 
 /***/ }),
 
@@ -167,39 +174,54 @@ var mapSateToProps = function mapSateToProps(state) {
   };
 };
 
-var mapDispactchToProps = function mapDispactchToProps() {
-  return {};
-};
-
 var input = {
   firstName: "",
+  lastName: "",
   email: ""
+};
+
+var findSpace = function findSpace(str) {
+  return Array.from(str).filter(function (letter) {
+    return letter === " " ? true : false;
+  })[0];
+};
+
+var mapDispactchToProps = function mapDispactchToProps(dispatch) {
+  var spaceNum = 0;
+  return {
+    handleChange: function handleChange(event) {
+      event.preventDefault();
+      spaceNum = findSpace(input.firstName);
+      input.lastName = input.firstName.slice(spaceNum);
+      input.firstName = input.firstName.slice(0, spaceNum);
+      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postStudent"])({
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email
+      })); //console.log(input.firstName, input.lastName, input.email);
+    }
+  };
 };
 
 var AddStudent = function AddStudent(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Add a Student:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: function onSubmit(event) {
-      event.preventDefault();
-      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postStudent"])({
-        firstName: input.firstName,
-        lastName: input.firstName,
-        email: input.description
-      })); //console.log(input.name, input.name, input.description);
-    }
+    onSubmit: props.handleChange
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Name: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.firstName = event.target.value; // console.log(event.target.value);
+      input.firstName = event.target.value;
+      console.log(event.target.value);
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Description: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Email: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.description = event.target.value; //console.log(event.target.value);
+      input.email = event.target.value;
+      console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSateToProps)(AddStudent));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSateToProps, mapDispactchToProps)(AddStudent));
 
 /***/ }),
 
@@ -652,12 +674,12 @@ var postStudent = function postStudent(data) {
     return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/students", {
       firstName: data.firstName,
       lastName: data.lastName,
-      description: data.description
+      email: data.email
     }).then(function (res) {
-      console.log("student:", res);
-      return res.config.data;
+      //console.log("student:", res);
+      return res.data;
     }).then(function (student) {
-      console.log("student:", student);
+      //console.log("student:", student);
       dispatch(addStudent(student));
     })["catch"](function (error) {
       return console.log(error);
