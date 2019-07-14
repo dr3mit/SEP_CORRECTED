@@ -13,13 +13,15 @@ const mapDispatchToProps = dispatch => {
   return {
     handleSubmit: event => {
       event.preventDefault();
-      dispatch(postCampus({ name: input.name, description: input.desription }));
+      dispatch(
+        postCampus({ name: input.name, description: input.description })
+      );
       console.log(input);
     }
   };
 };
 
-let input = { name: "", desription: "" };
+let input = { name: "", description: "" };
 
 const AddCampus = props => {
   return (

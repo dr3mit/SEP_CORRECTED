@@ -116,7 +116,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       event.preventDefault();
       dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postCampus"])({
         name: input.name,
-        description: input.desription
+        description: input.description
       }));
       console.log(input);
     }
@@ -125,7 +125,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var input = {
   name: "",
-  desription: ""
+  description: ""
 };
 
 var AddCampus = function AddCampus(props) {
