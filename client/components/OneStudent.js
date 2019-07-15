@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import UpdateStudent from "./UpdateStudent";
 const mapStateToProps = state => {
   return {
     students: state.students,
@@ -41,6 +42,7 @@ const OneStudent = props => {
           </tr>
         </tbody>
       </table>
+      <UpdateStudent />
     </div>
   );
 };

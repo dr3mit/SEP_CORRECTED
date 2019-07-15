@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { postStudent } from "../store";
-
+let message = "";
 const mapSateToProps = state => {
   return {
     campuses: state.campuses,
@@ -36,6 +36,7 @@ const mapDispactchToProps = dispatch => {
         input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
       input.lastName =
         input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
+
       dispatch(
         postStudent({
           firstName: input.firstName,
@@ -43,6 +44,10 @@ const mapDispactchToProps = dispatch => {
           email: input.email
         })
       );
+      if (!input.email) {
+        //console.log("test");
+        message = "Invalid Email entered.";
+      }
       //console.log(input.firstName, input.lastName, input.email);
     }
   };
@@ -58,7 +63,7 @@ const AddStudent = props => {
           onChange={event => {
             event.preventDefault();
             input.firstName = event.target.value;
-            console.log(event.target.value);
+            //console.log(event.target.value);
           }}
         />
         <label> Email: </label>
@@ -66,12 +71,13 @@ const AddStudent = props => {
           onChange={event => {
             event.preventDefault();
             input.email = event.target.value;
-            console.log(event.target.value);
+            // console.log(event.target.value);
           }}
         />
         <button>Submit</button>
       </form>
-      Please enter first and last name seperated by a space.
+      Please enter first and last names seperated by a space.
+      {message}
     </div>
   );
 };

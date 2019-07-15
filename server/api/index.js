@@ -43,7 +43,7 @@ router.post("/campuses", (req, res) => {
 
 router.post("/students", (req, res) => {
   return Student.create({
-    firstName: req.body.firstName, //req.body.name
+    firstName: req.body.firstName,
     lastName: req.body.lastName,
     imageUrl: "https://ibb.co/rHJK7xz", //req.body.imageUrl
     email: req.body.email,
@@ -66,4 +66,33 @@ router.delete("/student/:id", (req, res) => {
     .then(student => console.log(student))
     .catch(e => console.error(e));
 });
+
+router.put("campus/:id", (req, res) => {
+  return Campus.update(
+    { name: req.body.name, address: req.body.address },
+    { where: { id: req.params.id } }
+  )
+    .then(res => res.data)
+    .then(campus => {
+      console.log(campus);
+    })
+    .catch(e => console.error(e));
+});
+
+router.put("student/:id", (req, res) => {
+  return Student.update(
+    {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email
+    },
+    { where: { id: req.params.id } }
+  )
+    .then(res => res.data)
+    .then(student => {
+      console.log(student);
+    })
+    .catch(e => console.error(e));
+});
+
 module.exports = router;

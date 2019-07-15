@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { postCampus } from "../store";
-
+import { updStudent } from "../store";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -14,34 +13,41 @@ const mapDispatchToProps = dispatch => {
     handleSubmit: event => {
       event.preventDefault();
       dispatch(
-        postCampus({ name: input.name, description: input.description })
+        updStudent(
+          Number(window.location.pathname[window.location.pathname.length - 1])
+        )
       );
-      //console.log(input);
     }
   };
 };
 
-let input = { name: "", description: "" };
+let input = { firstName: "", lastName: "", email: "" };
 
-const AddCampus = props => {
+const UpdateStudent = props => {
   return (
     <div>
-      Add a Campus:
       <form onSubmit={props.handleSubmit}>
-        <label> Name: </label>
+        <span>Name:</span>
+        <label>First:</label>
         <input
           onChange={event => {
             event.preventDefault();
-            input.name = event.target.value;
-            //console.log(event.target.value);
+            input.firstName = event.target.value;
           }}
         />
-        <label> Description: </label>
+        <label>Last:</label>
         <input
           onChange={event => {
             event.preventDefault();
-            input.description = event.target.value;
-            //console.log(event.target.value);
+            input.lastName = event.target.value;
+          }}
+        />
+        <span>Contact:</span>
+        <label>Email:</label>
+        <input
+          onChange={event => {
+            event.preventDefault();
+            input.emailName = event.target.value;
           }}
         />
         <button>Submit</button>
@@ -53,4 +59,4 @@ const AddCampus = props => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddCampus);
+)(UpdateStudent);

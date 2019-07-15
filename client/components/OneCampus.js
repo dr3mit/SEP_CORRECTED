@@ -5,10 +5,10 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter,
   Switch
 } from "react-router-dom";
-import OneStudent from "./OneStudent";
+import UpdateCampus from "./UpdateCampus";
+
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
@@ -73,6 +73,7 @@ const OneCampus = props => {
             ))}
           </tbody>
         </table>
+        <UpdateCampus />
       </div>
     </Router>
   );

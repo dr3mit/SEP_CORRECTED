@@ -13,13 +13,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleDelete: (event, id) => {
+    handleDelete: event => {
       event.preventDefault();
       dispatch(delStudent(id));
     }
   };
 };
-
+let id = 0;
 export const Student = props => {
   return (
     <div>
@@ -38,7 +38,10 @@ export const Student = props => {
                       component={() => <OneStudent id={student.id} />}
                     />
                     <button
-                      onClick={() => props.handleDelete(event, student.id)}
+                      onMouseEnter={() => {
+                        id = student.id;
+                      }}
+                      onClick={props.handleDelete}
                     >
                       X
                     </button>

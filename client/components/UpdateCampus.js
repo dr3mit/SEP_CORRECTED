@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { postCampus } from "../store";
+import { updCampus } from "../store";
 
 const mapStateToProps = state => {
   return {
@@ -14,34 +14,32 @@ const mapDispatchToProps = dispatch => {
     handleSubmit: event => {
       event.preventDefault();
       dispatch(
-        postCampus({ name: input.name, description: input.description })
+        updCampus(
+          Number(window.location.pathname[window.location.pathname.length - 1])
+        )
       );
-      //console.log(input);
     }
   };
 };
 
-let input = { name: "", description: "" };
+let input = { name: "", address: "" };
 
-const AddCampus = props => {
+const UpdateStudent = props => {
   return (
     <div>
-      Add a Campus:
       <form onSubmit={props.handleSubmit}>
-        <label> Name: </label>
+        <label>Name:</label>
         <input
           onChange={event => {
             event.preventDefault();
             input.name = event.target.value;
-            //console.log(event.target.value);
           }}
         />
-        <label> Description: </label>
+        <label>Address:</label>
         <input
           onChange={event => {
             event.preventDefault();
-            input.description = event.target.value;
-            //console.log(event.target.value);
+            input.address = event.target.value;
           }}
         />
         <button>Submit</button>
@@ -53,4 +51,4 @@ const AddCampus = props => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddCampus);
+)(UpdateStudent);

@@ -98,6 +98,22 @@ export const showEnrolledStudents = enrolledStudents => {
 };
 //thunks
 
+export const updCampus = id => dispatch => {
+  axios
+    .put(`/api/campus/${id}`, { id: id })
+    .then(res => res.data)
+    .then(campus => dispatch(updateCampus(campus)))
+    .catch(e => console.error(e));
+};
+
+export const updStudent = id => dispatch => {
+  axios
+    .put(`/api/student/${id}`, { id: id })
+    .then(res => res.data)
+    .then(student => dispatch(updateStudent(student)))
+    .catch(e => console.error(e));
+};
+
 export const delStudent = id => dispatch => {
   return axios
     .delete(`/api/student/${id}`)
@@ -130,7 +146,7 @@ export const postStudent = data => dispatch => {
       return res.data;
     })
     .then(student => {
-      //console.log("student:", student);
+      console.log("student:", student);
       dispatch(addStudent(student));
     })
     .catch(error => console.log(error));
@@ -186,7 +202,7 @@ const campusesReducer = (campuses = [], action) => {
         campus.id === action.campus.id ? false : true
       );
     case UPDATE_CAMPUS:
-      return {};
+      return [...campuses, action.campus];
     case SHOW_CAMPUS:
       return action.campus;
     case SHOW_CAMPUSES:
@@ -201,16 +217,18 @@ const studentsReducer = (students = [], action) => {
   switch (action.type) {
     case ADD_STUDENT:
       return [...students, action.student];
-    case ENROLL_STUDENT:
-      return {};
-    case REMOVE_STUDENT:
-      return {};
     case DELETE_STUDENT:
-      return students.filter(student => student.id === action.student.id)
-        ? false
-        : true;
+      return students.filter(student =>
+        student.id === action.student.id ? false : true
+      );
     case UPDATE_STUDENT:
-      return {};
+      let retStudents = students.filter(student =>
+        student.id === action.student.id ? false : true
+      );
+      let updatedStudent = students.filter(student =>
+        student.id === action.student.id ? true : false
+      )[0];
+      return [...retStudents, updatedStudent];
     case SHOW_STUDENT:
       return action.student;
     case SHOW_STUDENTS:
