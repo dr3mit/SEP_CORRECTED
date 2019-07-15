@@ -46,10 +46,24 @@ router.post("/students", (req, res) => {
     firstName: req.body.firstName, //req.body.name
     lastName: req.body.lastName,
     imageUrl: "https://ibb.co/rHJK7xz", //req.body.imageUrl
-    email: "test@gmail.com",
+    email: req.body.email,
     gpa: 4.0
   })
     .then(student => res.send(student))
+    .catch(e => console.error(e));
+});
+
+router.delete("/campus/:id", (req, res) => {
+  return Campus.destroy({ where: { id: req.params.id } })
+    .then(res => res.data)
+    .then(campus => console.log(campus))
+    .catch(e => console.error(e));
+});
+
+router.delete("/student/:id", (req, res) => {
+  return Student.destroy({ where: { id: req.params.id } })
+    .then(res => res.data)
+    .then(student => console.log(student))
     .catch(e => console.error(e));
 });
 module.exports = router;

@@ -256,6 +256,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleDelete: function handleDelete(event, id) {
+      event.preventDefault();
+      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["delCampus"])(id));
+    }
+  };
+};
+
 var Campus = function Campus(props) {
   //console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, props.campuses.map(function (campus) {
@@ -270,10 +279,14 @@ var Campus = function Campus(props) {
       }
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus Image: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: campus.imageUrl
-    })));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick() {
+        return props.handleDelete(event, campus.id);
+      }
+    }, "X")));
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddCampus__WEBPACK_IMPORTED_MODULE_5__["default"], null));
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Campus));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Campus));
 
 /***/ }),
 
@@ -399,6 +412,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _OneStudent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OneStudent */ "./client/components/OneStudent.js");
 /* harmony import */ var _AddStudent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AddStudent */ "./client/components/AddStudent.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store */ "./client/store.js");
+
 
 
 
@@ -409,6 +424,15 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     campuses: state.campuses,
     students: state.students
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleDelete: function handleDelete(event, id) {
+      event.preventDefault();
+      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_5__["delStudent"])(id));
+    }
   };
 };
 
@@ -425,10 +449,14 @@ var Student = function Student(props) {
           id: student.id
         });
       }
-    })));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick() {
+        return props.handleDelete(event, student.id);
+      }
+    }, "X")));
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddStudent__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Student));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Student));
 
 /***/ }),
 
@@ -539,7 +567,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!*************************!*\
   !*** ./client/store.js ***!
   \*************************/
-/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, getEnrolledStudents, default */
+/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, deleteStudent, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, delStudent, delCampus, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, getEnrolledStudents, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -549,6 +577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enrollStudent", function() { return enrollStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeStudent", function() { return removeStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCampus", function() { return deleteCampus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteStudent", function() { return deleteStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateStudent", function() { return updateStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCampus", function() { return updateCampus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCampus", function() { return showCampus; });
@@ -556,6 +585,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCampuses", function() { return showCampuses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showStudents", function() { return showStudents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEnrolledStudents", function() { return showEnrolledStudents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delStudent", function() { return delStudent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delCampus", function() { return delCampus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postStudent", function() { return postStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postCampus", function() { return postCampus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStudents", function() { return getStudents; });
@@ -626,6 +657,12 @@ var deleteCampus = function deleteCampus(campus) {
     campus: campus
   };
 };
+var deleteStudent = function deleteStudent(student) {
+  return {
+    type: DELETE_STUDENT,
+    student: student
+  };
+};
 var updateStudent = function updateStudent(student) {
   return {
     type: UPDATE_STUDENT,
@@ -669,6 +706,28 @@ var showEnrolledStudents = function showEnrolledStudents(enrolledStudents) {
   };
 }; //thunks
 
+var delStudent = function delStudent(id) {
+  return function (dispatch) {
+    return axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]("/api/student/".concat(id)).then(function (res) {
+      return res.data;
+    }).then(function (student) {
+      return dispatch(deleteStudent(student));
+    })["catch"](function (e) {
+      return console.error(e);
+    });
+  };
+};
+var delCampus = function delCampus(id) {
+  return function (dispatch) {
+    return axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"]("/api/campus/".concat(id)).then(function (res) {
+      return res.data;
+    }).then(function (campus) {
+      dispatch(deleteCampus(campus));
+    })["catch"](function (e) {
+      return console.error(e);
+    });
+  };
+};
 var postStudent = function postStudent(data) {
   return function (dispatch) {
     return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/students", {
@@ -757,7 +816,9 @@ var campusesReducer = function campusesReducer() {
       return [].concat(_toConsumableArray(campuses), [action.campus]);
 
     case DELETE_CAMPUS:
-      return {};
+      return campuses.filter(function (campus) {
+        return campus.id === action.campus.id ? false : true;
+      });
 
     case UPDATE_CAMPUS:
       return {};
@@ -791,7 +852,9 @@ var studentsReducer = function studentsReducer() {
       return {};
 
     case DELETE_STUDENT:
-      return {};
+      return students.filter(function (student) {
+        return student.id === action.student.id;
+      }) ? false : true;
 
     case UPDATE_STUDENT:
       return {};
@@ -28212,7 +28275,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

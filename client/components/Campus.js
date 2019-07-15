@@ -2,12 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import OneCampus from "./OneCampus";
-import { getCampuses } from "../store";
+import { delCampus } from "../store";
 import AddCampus from "./AddCampus";
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
     students: state.students
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    handleDelete: (event, id) => {
+      event.preventDefault();
+      dispatch(delCampus(id));
+    }
   };
 };
 export const Campus = props => {
@@ -32,6 +40,11 @@ export const Campus = props => {
                   </td>
                   <td>
                     Campus Image: <img src={campus.imageUrl} />
+                    <button
+                      onClick={() => props.handleDelete(event, campus.id)}
+                    >
+                      X
+                    </button>
                   </td>
                 </tr>
               );
@@ -43,4 +56,7 @@ export const Campus = props => {
     </div>
   );
 };
-export default connect(mapStateToProps)(Campus);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Campus);

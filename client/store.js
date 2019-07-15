@@ -48,6 +48,12 @@ export const deleteCampus = campus => {
     campus
   };
 };
+export const deleteStudent = student => {
+  return {
+    type: DELETE_STUDENT,
+    student
+  };
+};
 export const updateStudent = student => {
   return {
     type: UPDATE_STUDENT,
@@ -91,6 +97,26 @@ export const showEnrolledStudents = enrolledStudents => {
   };
 };
 //thunks
+
+export const delStudent = id => dispatch => {
+  return axios
+    .delete(`/api/student/${id}`)
+    .then(res => {
+      return res.data;
+    })
+    .then(student => dispatch(deleteStudent(student)))
+    .catch(e => console.error(e));
+};
+
+export const delCampus = id => dispatch => {
+  return axios
+    .delete(`/api/campus/${id}`)
+    .then(res => res.data)
+    .then(campus => {
+      dispatch(deleteCampus(campus));
+    })
+    .catch(e => console.error(e));
+};
 
 export const postStudent = data => dispatch => {
   return axios
@@ -157,7 +183,9 @@ const campusesReducer = (campuses = [], action) => {
     case ADD_CAMPUS:
       return [...campuses, action.campus];
     case DELETE_CAMPUS:
-      return {};
+      return campuses.filter(campus =>
+        campus.id === action.campus.id ? false : true
+      );
     case UPDATE_CAMPUS:
       return {};
     case SHOW_CAMPUS:
@@ -179,7 +207,9 @@ const studentsReducer = (students = [], action) => {
     case REMOVE_STUDENT:
       return {};
     case DELETE_STUDENT:
-      return {};
+      return students.filter(student => student.id === action.student.id)
+        ? false
+        : true;
     case UPDATE_STUDENT:
       return {};
     case SHOW_STUDENT:
