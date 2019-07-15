@@ -181,9 +181,11 @@ var input = {
 };
 
 var findSpace = function findSpace(str) {
-  return Array.from(str).filter(function (letter) {
-    return letter === " " ? true : false;
-  })[0];
+  var index = 0;
+  Array.from(str).forEach(function (letter, idx) {
+    if (letter === " ") index = idx;
+  });
+  return index;
 };
 
 var mapDispactchToProps = function mapDispactchToProps(dispatch) {
@@ -192,8 +194,18 @@ var mapDispactchToProps = function mapDispactchToProps(dispatch) {
     handleChange: function handleChange(event) {
       event.preventDefault();
       spaceNum = findSpace(input.firstName);
-      input.lastName = input.firstName.slice(spaceNum);
-      input.firstName = input.firstName.slice(0, spaceNum);
+
+      if (spaceNum) {
+        input.lastName = input.firstName.slice(spaceNum, input.firstName.length);
+        input.firstName = input.firstName.slice(0, spaceNum);
+      }
+
+      if (!input.lastName) {
+        input.lastName = "UNKNOWN";
+      }
+
+      input.firstName = input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
+      input.lastName = input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
       dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postStudent"])({
         firstName: input.firstName,
         lastName: input.lastName,
@@ -218,7 +230,7 @@ var AddStudent = function AddStudent(props) {
       input.email = event.target.value;
       console.log(event.target.value);
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")), "Please enter first and last name seperated by a space.");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSateToProps, mapDispactchToProps)(AddStudent));
@@ -387,9 +399,9 @@ var OneStudent = function OneStudent(props) {
   if (!campus) campus = {
     name: "Not Enrolled at a campus."
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "".concat(student.firstName, " ").concat(student.lastName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Student:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Name: ", "".concat(student.firstName, " ").concat(student.lastName))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Email: ", student.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: student.imageUrl
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, student.gpa)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, campus.name)))));
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "GPA: ", student.gpa)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Campus: ", campus.name)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(OneStudent));
@@ -522,8 +534,14 @@ function (_Component) {
   _createClass(HomePage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.unsub = _store__WEBPACK_IMPORTED_MODULE_3__["default"].subscribe(function () {});
       _store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["getStudents"])());
       _store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["getCampuses"])());
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.unsub();
     }
   }, {
     key: "render",
@@ -567,7 +585,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!*************************!*\
   !*** ./client/store.js ***!
   \*************************/
-/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, deleteStudent, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, delStudent, delCampus, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, getEnrolledStudents, default */
+/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, deleteStudent, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, delStudent, delCampus, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -593,7 +611,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCampuses", function() { return getCampuses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStudent", function() { return getStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCampus", function() { return getCampus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEnrolledStudents", function() { return getEnrolledStudents; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_1__);
@@ -802,9 +819,6 @@ var getCampus = function getCampus(id) {
       return console.error(e);
     });
   };
-};
-var getEnrolledStudents = function getEnrolledStudents(dispatch) {
-  return function () {};
 }; //subReducers
 
 var campusesReducer = function campusesReducer() {

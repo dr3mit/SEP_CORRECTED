@@ -174,7 +174,6 @@ export const getCampus = id => dispatch => {
     .then(campus => dispatch(showCampus(campus)))
     .catch(e => console.error(e));
 };
-export const getEnrolledStudents = dispatch => () => {};
 
 //subReducers
 

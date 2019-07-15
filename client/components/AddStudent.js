@@ -9,16 +9,33 @@ const mapSateToProps = state => {
   };
 };
 let input = { firstName: "", lastName: "", email: "" };
-const findSpace = str =>
-  Array.from(str).filter(letter => (letter === " " ? true : false))[0];
+const findSpace = str => {
+  let index = 0;
+  Array.from(str).forEach((letter, idx) => {
+    if (letter === " ") index = idx;
+  });
+  return index;
+};
 const mapDispactchToProps = dispatch => {
   let spaceNum = 0;
   return {
     handleChange: event => {
       event.preventDefault();
       spaceNum = findSpace(input.firstName);
-      input.lastName = input.firstName.slice(spaceNum);
-      input.firstName = input.firstName.slice(0, spaceNum);
+      if (spaceNum) {
+        input.lastName = input.firstName.slice(
+          spaceNum,
+          input.firstName.length
+        );
+        input.firstName = input.firstName.slice(0, spaceNum);
+      }
+      if (!input.lastName) {
+        input.lastName = "UNKNOWN";
+      }
+      input.firstName =
+        input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
+      input.lastName =
+        input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
       dispatch(
         postStudent({
           firstName: input.firstName,
@@ -54,6 +71,7 @@ const AddStudent = props => {
         />
         <button>Submit</button>
       </form>
+      Please enter first and last name seperated by a space.
     </div>
   );
 };

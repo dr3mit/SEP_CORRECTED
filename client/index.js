@@ -16,8 +16,13 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+    this.unsub = store.subscribe(() => {});
     store.dispatch(getStudents());
     store.dispatch(getCampuses());
+  }
+
+  componentWillUnmount() {
+    this.unsub();
   }
 
   render() {

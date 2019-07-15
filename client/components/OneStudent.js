@@ -19,13 +19,14 @@ const OneStudent = props => {
 
   return (
     <div>
+      Student:
       <table>
         <tbody>
           <tr>
-            <td>{`${student.firstName} ${student.lastName}`}</td>
+            <td>Name: {`${student.firstName} ${student.lastName}`}</td>
           </tr>
           <tr>
-            <td>{student.email}</td>
+            <td>Email: {student.email}</td>
           </tr>
           <tr>
             <td>
@@ -33,10 +34,10 @@ const OneStudent = props => {
             </td>
           </tr>
           <tr>
-            <td>{student.gpa}</td>
+            <td>GPA: {student.gpa}</td>
           </tr>
           <tr>
-            <td>{campus.name}</td>
+            <td>Campus: {campus.name}</td>
           </tr>
         </tbody>
       </table>
