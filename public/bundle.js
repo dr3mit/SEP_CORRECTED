@@ -106,44 +106,50 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    campus: state.campus,
+    student: state.student
   };
-};
+}; // const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {
+//     handleSubmit: event => {
+//       event.preventDefault();
+//       dispatch(
+//         postCampus({ name: input.name, description: input.description })
+//       );
+//       //console.log(input);
+//     }
+//   };
+// };
+//let input = { name: "", description: "" };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    handleSubmit: function handleSubmit(event) {
-      event.preventDefault();
-      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postCampus"])({
-        name: input.name,
-        description: input.description
-      })); //console.log(input);
-    }
-  };
-};
-
-var input = {
-  name: "",
-  description: ""
-};
 
 var AddCampus = function AddCampus(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Add a Campus:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: props.handleSubmit
+    onSubmit: function onSubmit(event) {
+      event.preventDefault();
+      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postCampus"])({
+        name: props.campus.name,
+        description: props.campus.description
+      })); //console.log(input);
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Name: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.name = event.target.value; //console.log(event.target.value);
+      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["setCampusName"])(event.target.value)); //input.name = event.target.value;
+      //console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Description: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.description = event.target.value; //console.log(event.target.value);
+      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["setCampusDescription"])(event.target.value)); // input.description = event.target.value;
+      //console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(AddCampus));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps //mapDispatchToProps
+)(AddCampus));
 
 /***/ }),
 
@@ -168,74 +174,102 @@ var message = "";
 var mapSateToProps = function mapSateToProps(state) {
   return {
     campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    campus: state.campus,
+    student: state.student
   };
-};
+}; //let input = { firstName: "", lastName: "", email: "" };
+// const mapDispactchToProps = dispatch => {
+//   let spaceNum = 0;
+//   return {
+//     handleChange: event => {
+//       event.preventDefault();
+//       spaceNum = findSpace(input.firstName);
+//       if (spaceNum) {
+//         input.lastName = input.firstName.slice(
+//           spaceNum,
+//           input.firstName.length
+//         );
+//         input.firstName = input.firstName.slice(0, spaceNum);
+//       }
+//       if (!input.lastName) {
+//         input.lastName = "UNKNOWN";
+//       }
+//       input.firstName =
+//         input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
+//       input.lastName =
+//         input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
+//       dispatch(
+//         postStudent({
+//           firstName: input.firstName,
+//           lastName: input.lastName,
+//           email: input.email
+//         })
+//       );
+//       if (!input.email) {
+//         //console.log("test");
+//         message = "Invalid Email entered.";
+//       }
+//       //console.log(input.firstName, input.lastName, input.email);
+//     }
+//   };
+// };
 
-var input = {
-  firstName: "",
-  lastName: "",
-  email: ""
-};
 
-var findSpace = function findSpace(str) {
-  var index = 0;
-  Array.from(str).forEach(function (letter, idx) {
-    if (letter === " ") index = idx;
-  });
-  return index;
-};
-
-var mapDispactchToProps = function mapDispactchToProps(dispatch) {
+var AddStudent = function AddStudent(props) {
   var spaceNum = 0;
-  return {
-    handleChange: function handleChange(event) {
+
+  var findSpace = function findSpace(str) {
+    var index = 0;
+    Array.from(str).forEach(function (letter, idx) {
+      if (letter === " ") index = idx;
+    });
+    return index;
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Add a Student:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: function onSubmit(event) {
       event.preventDefault();
-      spaceNum = findSpace(input.firstName);
+      spaceNum = findSpace(props.student.firstName);
 
       if (spaceNum) {
-        input.lastName = input.firstName.slice(spaceNum, input.firstName.length);
-        input.firstName = input.firstName.slice(0, spaceNum);
+        props.student.lastName = props.student.firstName.slice(spaceNum, props.student.firstName.length);
+        props.student.firstName = props.student.firstName.slice(0, spaceNum);
       }
 
-      if (!input.lastName) {
-        input.lastName = "UNKNOWN";
+      if (!props.student.lastName) {
+        props.student.lastName = "UNKNOWN";
       }
 
-      input.firstName = input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
-      input.lastName = input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
-      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postStudent"])({
-        firstName: input.firstName,
-        lastName: input.lastName,
-        email: input.email
+      props.student.firstName = props.student.firstName.charAt(0).toUpperCase() + props.student.firstName.slice(1);
+      props.student.lastName = props.student.lastName.charAt(0).toUpperCase() + props.student.lastName.slice(1);
+      props.dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_2__["postStudent"])({
+        firstName: props.student.firstName,
+        lastName: props.student.lastName,
+        email: props.student.email
       }));
 
-      if (!input.email) {
+      if (!props.student.email) {
         //console.log("test");
         message = "Invalid Email entered.";
       } //console.log(input.firstName, input.lastName, input.email);
 
     }
-  };
-};
-
-var AddStudent = function AddStudent(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Add a Student:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: props.handleChange
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Name: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.firstName = event.target.value; //console.log(event.target.value);
+      props.student.firstName = event.target.value; //console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Email: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(event) {
       event.preventDefault();
-      input.email = event.target.value; // console.log(event.target.value);
+      props.student.email = event.target.value; // console.log(event.target.value);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")), "Please enter first and last names seperated by a space.", message);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSateToProps, mapDispactchToProps)(AddStudent));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSateToProps // mapDispactchToProps
+)(AddStudent));
 
 /***/ }),
 
@@ -777,7 +811,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!*************************!*\
   !*** ./client/store.js ***!
   \*************************/
-/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, deleteStudent, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, updCampus, updStudent, delStudent, delCampus, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, default */
+/*! exports provided: addStudent, addCampus, enrollStudent, removeStudent, deleteCampus, deleteStudent, updateStudent, updateCampus, showCampus, showStudent, showCampuses, showStudents, showEnrolledStudents, setCampusName, setCampusDescription, setStudentName, setStudentEmail, updCampus, updStudent, delStudent, delCampus, postStudent, postCampus, getStudents, getCampuses, getStudent, getCampus, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -795,6 +829,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showCampuses", function() { return showCampuses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showStudents", function() { return showStudents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showEnrolledStudents", function() { return showEnrolledStudents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCampusName", function() { return setCampusName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCampusDescription", function() { return setCampusDescription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setStudentName", function() { return setStudentName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setStudentEmail", function() { return setStudentEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updCampus", function() { return updCampus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updStudent", function() { return updStudent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delStudent", function() { return delStudent; });
@@ -819,6 +857,12 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(arguments[i], key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -836,7 +880,11 @@ var SHOW_CAMPUS = "SHOW_CAMPUS";
 var SHOW_STUDENT = "SHOW_STUDENT";
 var SHOW_CAMPUSES = "SHOW_CAMPUSES";
 var SHOW_STUDENTS = "SHOW_STUDENTS";
-var SHOW_ENROLLED_STUDENTS = "SHOW_ENROLLED_STUDENTS"; //action creators
+var SHOW_ENROLLED_STUDENTS = "SHOW_ENROLLED_STUDENTS";
+var SET_CAMPUS_NAME = "SET_CAMPUS_NAME";
+var SET_CAMPUS_DESCRIPTION = "SET_CAMPUS_DESCRIPTION";
+var SET_STUDENT_EMAIL = "SET_STUDENT_EMAIL";
+var SET_STUDENT_NAME = "SET_STUDENT_NAME"; //action creators
 
 var addStudent = function addStudent(student) {
   return {
@@ -914,6 +962,30 @@ var showEnrolledStudents = function showEnrolledStudents(enrolledStudents) {
   return {
     type: SHOW_ENROLLED_STUDENTS,
     enrolledStudents: enrolledStudents
+  };
+};
+var setCampusName = function setCampusName(name) {
+  return {
+    type: SET_CAMPUS_NAME,
+    name: name
+  };
+};
+var setCampusDescription = function setCampusDescription(description) {
+  return {
+    type: SET_CAMPUS_DESCRIPTION,
+    description: description
+  };
+};
+var setStudentName = function setStudentName(name) {
+  return {
+    type: SET_STUDENT_NAME,
+    name: name
+  };
+};
+var setStudentEmail = function setStudentEmail(email) {
+  return {
+    type: SET_STUDENT_EMAIL,
+    email: email
   };
 }; //thunks
 
@@ -1041,6 +1113,46 @@ var getCampus = function getCampus(id) {
   };
 }; //subReducers
 
+var campusReducer = function campusReducer() {
+  var campus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case SET_CAMPUS_NAME:
+      return _objectSpread({}, campus, {
+        name: action.name
+      });
+
+    case SET_CAMPUS_DESCRIPTION:
+      return _objectSpread({}, campus, {
+        description: action.description
+      });
+
+    default:
+      return campus;
+  }
+};
+
+var studentReducer = function studentReducer() {
+  var student = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case SET_STUDENT_NAME:
+      return _objectSpread({}, student, {
+        name: action.name
+      });
+
+    case SET_STUDENT_EMAIL:
+      return _objectSpread({}, student, {
+        email: action.email
+      });
+
+    default:
+      return student;
+  }
+};
+
 var campusesReducer = function campusesReducer() {
   var campuses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -1107,7 +1219,9 @@ var studentsReducer = function studentsReducer() {
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   campuses: campusesReducer,
-  students: studentsReducer
+  students: studentsReducer,
+  campus: campusReducer,
+  student: studentReducer
 });
 var Store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a, redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (Store);

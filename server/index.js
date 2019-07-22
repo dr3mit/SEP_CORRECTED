@@ -39,7 +39,11 @@ app.get("/", (req, res) =>
 
 app.listen(PORT, () => {
   console.log(
+    chalk.cyan(
+      ` ${timeConverter(Date.now() - firstRunDate)} since first running.`
+    ),
     chalk.greenBright("\n", "Application started on port: "),
+
     chalk.yellow(PORT),
     "\n"
   );

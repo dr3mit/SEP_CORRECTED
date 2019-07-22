@@ -1,38 +1,52 @@
 import React from "react";
 import { connect } from "react-redux";
-import { postCampus } from "../store";
+import { postCampus, setCampusDescription, setCampusName } from "../store";
 
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    campus: state.campus,
+    student: state.student
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleSubmit: event => {
-      event.preventDefault();
-      dispatch(
-        postCampus({ name: input.name, description: input.description })
-      );
-      //console.log(input);
-    }
-  };
-};
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {
+//     handleSubmit: event => {
+//       event.preventDefault();
+//       dispatch(
+//         postCampus({ name: input.name, description: input.description })
+//       );
+//       //console.log(input);
+//     }
+//   };
+// };
 
-let input = { name: "", description: "" };
+//let input = { name: "", description: "" };
 
 const AddCampus = props => {
   return (
     <div>
       Add a Campus:
-      <form onSubmit={props.handleSubmit}>
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          props.dispatch(
+            postCampus({
+              name: props.campus.name,
+              description: props.campus.description
+            })
+          );
+          //console.log(input);
+        }}
+      >
         <label> Name: </label>
         <input
           onChange={event => {
             event.preventDefault();
-            input.name = event.target.value;
+            props.dispatch(setCampusName(event.target.value));
+            //input.name = event.target.value;
             //console.log(event.target.value);
           }}
         />
@@ -40,7 +54,8 @@ const AddCampus = props => {
         <input
           onChange={event => {
             event.preventDefault();
-            input.description = event.target.value;
+            props.dispatch(setCampusDescription(event.target.value));
+            // input.description = event.target.value;
             //console.log(event.target.value);
           }}
         />
@@ -51,6 +66,6 @@ const AddCampus = props => {
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
+  //mapDispatchToProps
 )(AddCampus);

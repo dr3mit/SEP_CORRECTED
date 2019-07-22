@@ -17,6 +17,11 @@ const SHOW_STUDENT = "SHOW_STUDENT";
 const SHOW_CAMPUSES = "SHOW_CAMPUSES";
 const SHOW_STUDENTS = "SHOW_STUDENTS";
 const SHOW_ENROLLED_STUDENTS = "SHOW_ENROLLED_STUDENTS";
+const SET_CAMPUS_NAME = "SET_CAMPUS_NAME";
+const SET_CAMPUS_DESCRIPTION = "SET_CAMPUS_DESCRIPTION";
+const SET_STUDENT_EMAIL = "SET_STUDENT_EMAIL";
+const SET_STUDENT_NAME = "SET_STUDENT_NAME";
+
 //action creators
 export const addStudent = student => {
   return {
@@ -94,6 +99,34 @@ export const showEnrolledStudents = enrolledStudents => {
   return {
     type: SHOW_ENROLLED_STUDENTS,
     enrolledStudents
+  };
+};
+
+export const setCampusName = name => {
+  return {
+    type: SET_CAMPUS_NAME,
+    name
+  };
+};
+
+export const setCampusDescription = description => {
+  return {
+    type: SET_CAMPUS_DESCRIPTION,
+    description
+  };
+};
+
+export const setStudentName = name => {
+  return {
+    type: SET_STUDENT_NAME,
+    name
+  };
+};
+
+export const setStudentEmail = email => {
+  return {
+    type: SET_STUDENT_EMAIL,
+    email
   };
 };
 //thunks
@@ -193,6 +226,28 @@ export const getCampus = id => dispatch => {
 
 //subReducers
 
+const campusReducer = (campus = {}, action) => {
+  switch (action.type) {
+    case SET_CAMPUS_NAME:
+      return { ...campus, name: action.name };
+    case SET_CAMPUS_DESCRIPTION:
+      return { ...campus, description: action.description };
+    default:
+      return campus;
+  }
+};
+
+const studentReducer = (student = {}, action) => {
+  switch (action.type) {
+    case SET_STUDENT_NAME:
+      return { ...student, name: action.name };
+    case SET_STUDENT_EMAIL:
+      return { ...student, email: action.email };
+    default:
+      return student;
+  }
+};
+
 const campusesReducer = (campuses = [], action) => {
   switch (action.type) {
     case ADD_CAMPUS:
@@ -241,7 +296,9 @@ const studentsReducer = (students = [], action) => {
 //combineReducers
 const rootReducer = combineReducers({
   campuses: campusesReducer,
-  students: studentsReducer
+  students: studentsReducer,
+  campus: campusReducer,
+  student: studentReducer
 });
 
 const Store = createStore(
