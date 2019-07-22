@@ -11,20 +11,6 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return {
-//     handleSubmit: event => {
-//       event.preventDefault();
-//       dispatch(
-//         postCampus({ name: input.name, description: input.description })
-//       );
-//       //console.log(input);
-//     }
-//   };
-// };
-
-//let input = { name: "", description: "" };
-
 const AddCampus = props => {
   return (
     <div>
@@ -38,7 +24,6 @@ const AddCampus = props => {
               description: props.campus.description
             })
           );
-          //console.log(input);
         }}
       >
         <label> Name: </label>
@@ -46,8 +31,6 @@ const AddCampus = props => {
           onChange={event => {
             event.preventDefault();
             props.dispatch(setCampusName(event.target.value));
-            //input.name = event.target.value;
-            //console.log(event.target.value);
           }}
         />
         <label> Description: </label>
@@ -55,8 +38,6 @@ const AddCampus = props => {
           onChange={event => {
             event.preventDefault();
             props.dispatch(setCampusDescription(event.target.value));
-            // input.description = event.target.value;
-            //console.log(event.target.value);
           }}
         />
         <button>Submit</button>
@@ -65,7 +46,4 @@ const AddCampus = props => {
   );
 };
 
-export default connect(
-  mapStateToProps
-  //mapDispatchToProps
-)(AddCampus);
+export default connect(mapStateToProps)(AddCampus);

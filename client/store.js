@@ -175,7 +175,6 @@ export const postStudent = data => dispatch => {
       email: data.email
     })
     .then(res => {
-      //console.log("student:", res);
       return res.data;
     })
     .then(student => {

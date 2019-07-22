@@ -76,16 +76,6 @@ db.sync({ force: true })
         student.getCampus().then();
       })
       .catch(e => console.error(e));
-
-    // RIT.then(rit => rit.addStudent(3))
-    //   .then(rit => rit.addStudent(4))
-    //   .then(rit => rit.getStudents().then())
-    //   .catch(e => console.log(e));
-
-    // RPI.then(rpi => rpi.addStudent(1))
-    //   .then(rpi => rpi.addStudent(2))
-    //   .then(rpi => rpi.getStudents().then())
-    //   .catch(e => console.log(e));
   })
   .catch(e =>
     console.error(chalk.yellow("-----____db failed to sync____------"), e)

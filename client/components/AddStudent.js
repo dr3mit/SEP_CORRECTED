@@ -10,44 +10,6 @@ const mapSateToProps = state => {
     student: state.student
   };
 };
-//let input = { firstName: "", lastName: "", email: "" };
-
-// const mapDispactchToProps = dispatch => {
-//   let spaceNum = 0;
-//   return {
-//     handleChange: event => {
-//       event.preventDefault();
-//       spaceNum = findSpace(input.firstName);
-//       if (spaceNum) {
-//         input.lastName = input.firstName.slice(
-//           spaceNum,
-//           input.firstName.length
-//         );
-//         input.firstName = input.firstName.slice(0, spaceNum);
-//       }
-//       if (!input.lastName) {
-//         input.lastName = "UNKNOWN";
-//       }
-//       input.firstName =
-//         input.firstName.charAt(0).toUpperCase() + input.firstName.slice(1);
-//       input.lastName =
-//         input.lastName.charAt(0).toUpperCase() + input.lastName.slice(1);
-
-//       dispatch(
-//         postStudent({
-//           firstName: input.firstName,
-//           lastName: input.lastName,
-//           email: input.email
-//         })
-//       );
-//       if (!input.email) {
-//         //console.log("test");
-//         message = "Invalid Email entered.";
-//       }
-//       //console.log(input.firstName, input.lastName, input.email);
-//     }
-//   };
-// };
 
 const AddStudent = props => {
   let spaceNum = 0;
@@ -93,10 +55,8 @@ const AddStudent = props => {
             })
           );
           if (!props.student.email) {
-            //console.log("test");
             message = "Invalid Email entered.";
           }
-          //console.log(input.firstName, input.lastName, input.email);
         }}
       >
         <label> Name: </label>
@@ -104,7 +64,6 @@ const AddStudent = props => {
           onChange={event => {
             event.preventDefault();
             props.student.firstName = event.target.value;
-            //console.log(event.target.value);
           }}
         />
         <label> Email: </label>
@@ -112,7 +71,6 @@ const AddStudent = props => {
           onChange={event => {
             event.preventDefault();
             props.student.email = event.target.value;
-            // console.log(event.target.value);
           }}
         />
         <button>Submit</button>
@@ -123,7 +81,4 @@ const AddStudent = props => {
   );
 };
 
-export default connect(
-  mapSateToProps
-  // mapDispactchToProps
-)(AddStudent);
+export default connect(mapSateToProps)(AddStudent);

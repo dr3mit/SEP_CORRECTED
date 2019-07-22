@@ -15,7 +15,7 @@ const OneStudent = props => {
   let campus = props.campuses.filter(campus =>
     campus.id === student.campusId ? true : false
   )[0];
-  //console.log("campus: ", campus);
+
   if (!campus) campus = { name: "Not Enrolled at a campus." };
 
   return (
